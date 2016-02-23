@@ -1,3 +1,4 @@
+// Operator overloading
 // Job4.2.cpp : Defines the entry point for the console application.
 //
 
@@ -11,8 +12,8 @@ using namespace std;
 
 class String {
 /*******************************************************************************************/
-	friend ostream &operator << (ostream &out, const String &p);	// friend määritys outputtiin
-	friend String operator + (const String &p, const String &p2);				// friend määritys + operaattoriin
+	friend ostream &operator << (ostream &out, const String &p);	// friend mÃ¤Ã¤ritys outputtiin
+	friend String operator + (const String &p, const String &p2);				// friend mÃ¤Ã¤ritys + operaattoriin
 
 /*******************************************************************************************/
 public:
@@ -20,11 +21,11 @@ public:
 	String(String &p);			// copy constructor jossa viite parametri
 	~String();				//destructor
 
-	void list();			// norm luokkafunktion määritys
+	void list();			// norm luokkafunktion mÃ¤Ã¤ritys
 /*********************************************************************************************/
 
 	String();				// construktori jossa ei parametreja.
-	String &operator = (String &param);		//operator overloading funk. määritys jossa viiteoperaattori sekä viite parametri
+	String &operator = (String &param);		//operator overloading funk. mÃ¤Ã¤ritys jossa viiteoperaattori sekÃ¤ viite parametri
 
 	String &operator++();		// pre-increment
     String operator++(int);		// post-increment
@@ -32,7 +33,7 @@ public:
 
 /********************************************************************************************/
 private:
-	char *c_string;			// luodaan luokan sisäinen dynamic data member
+	char *c_string;			// luodaan luokan sisÃ¤inen dynamic data member
 };
 void f(String s);		// ordinary function, not a member of the class
 
@@ -84,13 +85,13 @@ void f(String s) {			// norm.funtion toteutus arvo parametrilla
 
 
 
-String::String() {		// constructor toteutus, ei tarvitse mitään sinne.
+String::String() {		// constructor toteutus, ei tarvitse mitÃ¤Ã¤n sinne.
 						//c_string = "Undefined";
 }
 String &String::operator = (String &param) {
 	if (this != &param) {		//avoid damages in self assignment
 		delete c_string;
-		c_string = new char[strlen(param.c_string) + 1];		// tehdään uusi tila dynaamiseen muistiin.
+		c_string = new char[strlen(param.c_string) + 1];		// tehdÃ¤Ã¤n uusi tila dynaamiseen muistiin.
 		strcpy(c_string, param.c_string);					// kopioidaan normaalisti
 	}
 	return *this;
@@ -101,12 +102,12 @@ ostream &operator << (ostream &out, const String &p) {	// friend toteutus output
 	return out;
 }
 String operator + (const String &p, const String &p2) {
-	char *joku;		// luodaan char tyyppinen osoitin, kuten String luokassakin tehdään.
-	joku = new char[(strlen(p.c_string)) + (strlen(p2.c_string)) + 1];	// luodaan char taulukko ja varataan muistista tarvittava molempien merkkijonojen merkkimäärä dynaamisesti, + lopetusmerkki '0'
+	char *joku;		// luodaan char tyyppinen osoitin, kuten String luokassakin tehdÃ¤Ã¤n.
+	joku = new char[(strlen(p.c_string)) + (strlen(p2.c_string)) + 1];	// luodaan char taulukko ja varataan muistista tarvittava molempien merkkijonojen merkkimÃ¤Ã¤rÃ¤ dynaamisesti, + lopetusmerkki '0'
 	strcpy(joku, p.c_string);	// kopioidaan merkkijonot luotuun taulukkoon
 	strcat(joku, p2.c_string);	// -||-
 
-	String sum(joku);	// luodaan uusi String olio jonka sisällä yhdistetty merkkijono.
+	String sum(joku);	// luodaan uusi String olio jonka sisÃ¤llÃ¤ yhdistetty merkkijono.
 
 	return sum;		// palautetaan String olio.
 }
